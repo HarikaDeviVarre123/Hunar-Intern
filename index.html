@@ -1,97 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>CodeNow</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<nav class="navbar">
-<h2 class="logo"><span>Code</span>Now</h2>
-<div class="menu">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="register.html">Register</a>
-<a href="contact.html">Contact</a>
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">NETFLIX</div>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">TV Shows</a></li>
+    <li><a href="#">Movies</a></li>
+    <li><a href="#">My List</a></li>
+  </ul>
+  <div class="nav-right">
+    <input type="text" placeholder="Search..." />
+    <div class="profile">&#128100; User</div>
+  </div>
 </div>
-</nav>
 
+<!-- Hero -->
 <div class="hero">
-<div class="hero-text">
-<h1>Master Programming Skills 🚀</h1>
-<p>Learn C, C++, Java and Python with real-world projects.</p>
-<a href="register.html"><button>Get Started</button></a>
+  <div class="hero-content">
+    <h1>Interstellar</h1>
+    <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+    <div class="hero-btns">
+      <button class="btn-play" onclick="openPlayer('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80', 'Interstellar')">&#9654; Play</button>
+      <button class="btn-info" onclick="openModal(movies[0])">&#9432; More Info</button>
+    </div>
+  </div>
 </div>
 
-<div class="hero-img">
-<img src="https://thumbs.dreamstime.com/b/busy-professional-business-people-working-office-laptop-talking-two-busy-professional-business-people-working-305307715.jpg">
-</div>
+<!-- Movie Rows -->
+<div id="content"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <img id="modalImg" src="" alt=""/>
+    <div class="modal-body">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-meta">
+        <span id="modalYear"></span>
+        <span id="modalDur"></span>
+        <span style="color:#46d369" id="modalMatch"></span>
+      </div>
+      <p id="modalDesc"></p>
+      <div class="modal-btns">
+        <button class="modal-play" id="modalPlayBtn">&#9654; Play</button>
+        <button class="modal-close-btn" onclick="closeModal()">&#10005; Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<h2 class="title">Our Courses</h2>
-
-<div class="cards">
-
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png">
-<h3>C Programming</h3>
-<p>Learn fundamentals, loops, and functions.</p>
-<a href="register.html"><button>Enroll</button></a>
+<!-- Player -->
+<div class="player-overlay" id="playerOverlay">
+  <div class="player-box">
+    <button class="back-btn" onclick="closePlayer()">&#8592; Back</button>
+    <div class="player-screen">
+      <img id="playerImg" src="" alt=""/>
+      <span class="player-play-icon" id="playIcon" onclick="togglePlay()">&#9654;</span>
+    </div>
+    <div class="player-controls">
+      <div class="progress" onclick="seekBar(event)">
+        <div class="progress-done" id="progressBar"></div>
+      </div>
+      <div class="ctrl-row">
+        <div>
+          <button onclick="togglePlay()" id="ctrlBtn">&#9654;</button>
+          <button>&#9198;</button>
+          <button>&#9197;</button>
+          <button>&#128266;</button>
+        </div>
+        <div class="time" id="timeDisplay">0:00 / 2:49:00</div>
+        <div>
+          <button>&#9881;</button>
+          <button>&#9974;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg">
-<h3>C++ Programming</h3>
-<p>Master OOP and advanced programming.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-
-<div class="card">
-<img src="https://cdn-icons-png.flaticon.com/512/226/226777.png">
-<h3>Java Programming</h3>
-<p>Build real-world applications using Java.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-
-<div class="card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png">
-<h3>Python Programming</h3>
-<p>Learn Python for AI and automation.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-<div class="card">
-<img src="https://img.icons8.com/color/96/power-bi.png">
-<h3>Power BI</h3>
-<p>Learn data visualization and dashboards.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-
-<div class="card">
-<img src="https://campusbuddy.org/wp-content/uploads/2024/12/Cloud-Computing.png">
-<h3>Cloud Computing</h3>
-<p>Understand cloud services and deployment.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-
-<div class="card">
-<img src="https://img.icons8.com/color/96/artificial-intelligence.png">
-<h3>Machine Learning</h3>
-<p>Learn algorithms and data-based predictions.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-
-<div class="card">
-<img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/17225/course_17225_image.png">
-<h3>Artificial Intelligence</h3>
-<p>Build smart systems and AI applications.</p>
-<a href="register.html"><button>Enroll</button></a>
-</div>
-</div>
-
+<!-- Footer -->
 <footer>
-<p>© 2026 CodeNow | Designed by Harika </p>
+  <p>Netflix Clone Project | Hunar Intern Task 3</p>
+  <p style="margin-top:5px;">&#169; 2024 This is just a demo project, not the real Netflix.</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>

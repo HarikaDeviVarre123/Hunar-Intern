@@ -1,127 +1,283 @@
-// ── MOVIE DATA ──
-var movies = [
-  { title: "Interstellar", year: "2014", dur: "2h 49m", match: "98% Match", desc: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=70" },
-  { title: "The Dark Knight", year: "2008", dur: "2h 32m", match: "96% Match", desc: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", img: "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=400&q=70" },
-  { title: "Inception", year: "2010", dur: "2h 28m", match: "95% Match", desc: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.", img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=400&q=70" },
-  { title: "Avengers: Endgame", year: "2019", dur: "3h 1m", match: "97% Match", desc: "After the devastating events of Avengers: Infinity War, the universe is in ruins. The Avengers assemble once more to reverse Thanos' actions.", img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=70" },
-  { title: "The Matrix", year: "1999", dur: "2h 16m", match: "94% Match", desc: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", img: "https://images.unsplash.com/photo-1614849963640-9cc74b2a826f?w=400&q=70" },
-  { title: "Dune", year: "2021", dur: "2h 35m", match: "93% Match", desc: "A noble family becomes embroiled in a war for control over the galaxy's most valuable asset while its heir becomes troubled by visions of a dark future.", img: "https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=400&q=70" },
-  { title: "Joker", year: "2019", dur: "2h 2m", match: "91% Match", desc: "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society.", img: "https://images.unsplash.com/photo-1531685250784-7569952593d2?w=400&q=70" },
-  { title: "Spider-Man: NWH", year: "2021", dur: "2h 28m", match: "96% Match", desc: "Peter Parker's secret identity is revealed and he asks Doctor Strange for help, but things go dangerously wrong.", img: "https://images.unsplash.com/photo-1605806616949-1e87b487fc2f?w=400&q=70" },
-];
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
 
-// ── TV SHOW DATA ──
-var tvShows = [
-  { title: "Breaking Bad", year: "2008", dur: "5 Seasons", match: "99% Match", desc: "A chemistry teacher turned meth manufacturer partners with a former student to build a drug empire.", img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=70" },
-  { title: "Stranger Things", year: "2016", dur: "4 Seasons", match: "97% Match", desc: "A group of kids encounter supernatural forces and secret government exploits in Hawkins, Indiana.", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=70" },
-  { title: "Money Heist", year: "2017", dur: "5 Seasons", match: "95% Match", desc: "A criminal mastermind who goes by The Professor has a plan to pull off the biggest heist in recorded history.", img: "https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=400&q=70" },
-  { title: "Dark", year: "2017", dur: "3 Seasons", match: "96% Match", desc: "A family saga with a supernatural twist set in a German town where four families are affected by the disappearance of two children.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=70" },
-  { title: "Squid Game", year: "2021", dur: "2 Seasons", match: "94% Match", desc: "Hundreds of cash-strapped players accept a strange invitation to compete in children's games.", img: "https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=400&q=70" },
-  { title: "The Witcher", year: "2019", dur: "3 Seasons", match: "90% Match", desc: "Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.", img: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=400&q=70" },
-];
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
 
-var trending = [movies[3], movies[1], tvShows[1], movies[0], tvShows[4], tvShows[2], movies[6], tvShows[0]];
-
-// ── RENDER ROWS ──
-var content = document.getElementById('content');
-
-function makeRow(title, items) {
-  var section = document.createElement('div');
-  section.className = 'section';
-  section.innerHTML = '<h2>' + title + '</h2>';
-
-  var row = document.createElement('div');
-  row.className = 'movies-row';
-
-  items.forEach(function(item) {
-    var card = document.createElement('div');
-    card.className = 'movie-card';
-    card.innerHTML = '<img src="' + item.img + '" alt="' + item.title + '" /><div class="card-title">' + item.title + '</div>';
-    card.onclick = function() { openModal(item); };
-    row.appendChild(card);
-  });
-
-  section.appendChild(row);
-  content.appendChild(section);
-}
-
-makeRow('Trending Now', trending);
-makeRow('Popular Movies', movies);
-makeRow('Top TV Shows', tvShows);
-
-// ── MODAL ──
-function openModal(item) {
-  document.getElementById('modalImg').src = item.img;
-  document.getElementById('modalTitle').textContent = item.title;
-  document.getElementById('modalYear').textContent = item.year;
-  document.getElementById('modalDur').textContent = item.dur;
-  document.getElementById('modalMatch').textContent = item.match;
-  document.getElementById('modalDesc').textContent = item.desc;
-  document.getElementById('modalPlayBtn').onclick = function() {
-    closeModal();
-    openPlayer(item.img, item.title);
-  };
-  document.getElementById('modalOverlay').classList.add('show');
-}
-
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('show');
-}
-
-// close modal when clicking outside
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
 });
 
-// ── VIDEO PLAYER ──
-var isPlaying = false;
-var progressVal = 0;
-var interval = null;
-
-function openPlayer(imgSrc, title) {
-  document.getElementById('playerImg').src = imgSrc;
-  document.getElementById('playerOverlay').classList.add('show');
-  isPlaying = false;
-  progressVal = 0;
-  document.getElementById('progressBar').style.width = '0%';
-  document.getElementById('playIcon').textContent = '\u25B6';
-  document.getElementById('ctrlBtn').textContent = '\u25B6';
-  document.getElementById('timeDisplay').textContent = '0:00 / 2:49:00';
-  clearInterval(interval);
+function animateFollower() {
+  followerX += (mouseX - followerX) * 0.12;
+  followerY += (mouseY - followerY) * 0.12;
+  cursorFollower.style.left = (followerX - 16) + 'px';
+  cursorFollower.style.top = (followerY - 16) + 'px';
+  requestAnimationFrame(animateFollower);
 }
+animateFollower();
 
-function closePlayer() {
-  document.getElementById('playerOverlay').classList.remove('show');
-  clearInterval(interval);
-  isPlaying = false;
-}
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    cursorFollower.style.transform = 'scale(1.5)';
+    cursorFollower.style.borderColor = 'rgba(232,255,71,0.7)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    cursorFollower.style.transform = 'scale(1)';
+    cursorFollower.style.borderColor = 'rgba(232,255,71,0.4)';
+  });
+});
 
-function togglePlay() {
-  isPlaying = !isPlaying;
-  document.getElementById('playIcon').textContent = isPlaying ? '\u23F8' : '\u25B6';
-  document.getElementById('ctrlBtn').textContent = isPlaying ? '\u23F8' : '\u25B6';
+const navbar = document.getElementById('navbar');
 
-  if (isPlaying) {
-    interval = setInterval(function() {
-      progressVal += 0.05;
-      if (progressVal >= 100) {
-        progressVal = 100;
-        clearInterval(interval);
-      }
-      document.getElementById('progressBar').style.width = progressVal + '%';
-      var secs = Math.floor(progressVal / 100 * 10140);
-      var m = Math.floor(secs / 60);
-      var s = secs % 60;
-      document.getElementById('timeDisplay').textContent = m + ':' + (s < 10 ? '0' : '') + s + ' / 2:49:00';
-    }, 300);
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
   } else {
-    clearInterval(interval);
+    navbar.classList.remove('scrolled');
+  }
+  updateActiveNav();
+});
+
+const navLinks = document.querySelectorAll('.nav-link');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href');
+    const targetEl = document.querySelector(targetId);
+    if (targetEl) smoothScrollTo(targetEl);
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+function smoothScrollTo(target) {
+  const navHeight = navbar.offsetHeight;
+  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  const duration = 900;
+  let start = null;
+
+  function step(timestamp) {
+    if (!start) start = timestamp;
+    const progress = timestamp - start;
+    const ease = easeInOutCubic(Math.min(progress / duration, 1));
+    window.scrollTo(0, startPosition + distance * ease);
+    if (progress < duration) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function updateActiveNav() {
+  const sections = document.querySelectorAll('.section');
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - navbar.offsetHeight - 60;
+    if (window.scrollY >= sectionTop) current = '#' + section.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === current) link.classList.add('active');
+  });
+}
+
+const navToggle = document.getElementById('navToggle');
+const navLinksMenu = document.getElementById('navLinks');
+
+navToggle.addEventListener('click', () => {
+  navLinksMenu.classList.toggle('open');
+});
+
+document.addEventListener('click', (e) => {
+  if (!navbar.contains(e.target)) navLinksMenu.classList.remove('open');
+});
+
+const typedEl = document.getElementById('typed-text');
+const phrases = ['Python.', 'Web Dev.', 'Problem Solving.', 'Data Analytics.', 'Building Things.'];
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  const currentPhrase = phrases[phraseIndex];
+  if (isDeleting) {
+    typedEl.textContent = currentPhrase.substring(0, charIndex - 1);
+    charIndex--;
+  } else {
+    typedEl.textContent = currentPhrase.substring(0, charIndex + 1);
+    charIndex++;
+  }
+
+  let speed = isDeleting ? 60 : 110;
+
+  if (!isDeleting && charIndex === currentPhrase.length) {
+    speed = 1800;
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    speed = 400;
+  }
+
+  setTimeout(typeEffect, speed);
+}
+
+setTimeout(typeEffect, 1200);
+
+document.querySelectorAll('.view-details-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.getAttribute('data-target');
+    const detailsEl = document.getElementById(targetId);
+    const isOpen = detailsEl.classList.toggle('open');
+    const btnText = btn.querySelector('span');
+    const btnIcon = btn.querySelector('i');
+    btnText.textContent = isOpen ? 'Hide Details' : 'View Details';
+    btnIcon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+    btn.style.background = isOpen ? 'var(--accent2)' : '';
+    btn.style.color = isOpen ? 'white' : '';
+    btn.style.borderColor = isOpen ? 'var(--accent2)' : '';
+  });
+});
+
+const sliderTrack = document.getElementById('sliderTrack');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const dotsContainer = document.getElementById('sliderDots');
+const cards = document.querySelectorAll('.project-card');
+let currentIndex = 0;
+
+function getCardsPerView() {
+  if (window.innerWidth <= 768) return 1;
+  if (window.innerWidth <= 1024) return 2;
+  return 3;
+}
+
+function buildDots() {
+  dotsContainer.innerHTML = '';
+  const totalSlides = Math.ceil(cards.length / getCardsPerView());
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
   }
 }
 
-function seekBar(e) {
-  var bar = e.currentTarget;
-  var rect = bar.getBoundingClientRect();
-  progressVal = ((e.clientX - rect.left) / rect.width) * 100;
-  document.getElementById('progressBar').style.width = progressVal + '%';
+function updateSlider() {
+  const cpv = getCardsPerView();
+  const cardWidth = cards[0].offsetWidth;
+  const gap = 24;
+  const offset = currentIndex * (cardWidth + gap) * cpv;
+  sliderTrack.style.transform = `translateX(-${offset}px)`;
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentIndex);
+  });
+}
+
+function goToSlide(index) {
+  const totalSlides = Math.ceil(cards.length / getCardsPerView());
+  currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+  updateSlider();
+}
+
+nextBtn.addEventListener('click', () => {
+  const totalSlides = Math.ceil(cards.length / getCardsPerView());
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateSlider();
+});
+
+prevBtn.addEventListener('click', () => {
+  const totalSlides = Math.ceil(cards.length / getCardsPerView());
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  updateSlider();
+});
+
+let autoSlide = setInterval(() => {
+  const totalSlides = Math.ceil(cards.length / getCardsPerView());
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateSlider();
+}, 4000);
+
+sliderTrack.addEventListener('mouseenter', () => clearInterval(autoSlide));
+sliderTrack.addEventListener('mouseleave', () => {
+  autoSlide = setInterval(() => {
+    const totalSlides = Math.ceil(cards.length / getCardsPerView());
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlider();
+  }, 4000);
+});
+
+let touchStartX = 0;
+sliderTrack.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+sliderTrack.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) nextBtn.click();
+    else prevBtn.click();
+  }
+});
+
+window.addEventListener('resize', () => {
+  buildDots();
+  currentIndex = 0;
+  updateSlider();
+});
+
+buildDots();
+
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = contactForm.querySelector('button[type="submit"]');
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = originalHTML;
+    btn.disabled = false;
+    contactForm.reset();
+    formSuccess.classList.add('show');
+    setTimeout(() => formSuccess.classList.remove('show'), 4000);
+  }, 1500);
+});
+
+const skillCards = document.querySelectorAll('.skill-card');
+
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const card = entry.target;
+      const delay = parseInt(card.getAttribute('data-delay')) || 0;
+      setTimeout(() => {
+        card.classList.add('visible');
+        const fill = card.querySelector('.skill-fill');
+        if (fill) fill.style.width = fill.getAttribute('data-width') + '%';
+      }, delay);
+      skillObserver.unobserve(card);
+    }
+  });
+}, { threshold: 0.15 });
+
+skillCards.forEach(card => skillObserver.observe(card));
+
+const backToTop = document.querySelector('.back-to-top');
+if (backToTop) {
+  backToTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    smoothScrollTo(document.getElementById('home'));
+  });
 }

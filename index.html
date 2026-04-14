@@ -3,96 +3,298 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Netflix Clone</title>
+  <title>Harika Devi Varre | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
 
-<!-- Navbar -->
-<div class="navbar">
-  <div class="logo">NETFLIX</div>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">TV Shows</a></li>
-    <li><a href="#">Movies</a></li>
-    <li><a href="#">My List</a></li>
-  </ul>
-  <div class="nav-right">
-    <input type="text" placeholder="Search..." />
-    <div class="profile">&#128100; User</div>
-  </div>
-</div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
 
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-content">
-    <h1>Interstellar</h1>
-    <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
-    <div class="hero-btns">
-      <button class="btn-play" onclick="openPlayer('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80', 'Interstellar')">&#9654; Play</button>
-      <button class="btn-info" onclick="openModal(movies[0])">&#9432; More Info</button>
+  <nav id="navbar">
+    <div class="nav-logo">HD<span>.</span></div>
+    <div class="nav-toggle" id="navToggle">
+      <span></span><span></span><span></span>
     </div>
-  </div>
-</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
 
-<!-- Movie Rows -->
-<div id="content"></div>
-
-<!-- Modal -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-box">
-    <img id="modalImg" src="" alt=""/>
-    <div class="modal-body">
-      <h2 id="modalTitle"></h2>
-      <div class="modal-meta">
-        <span id="modalYear"></span>
-        <span id="modalDur"></span>
-        <span style="color:#46d369" id="modalMatch"></span>
-      </div>
-      <p id="modalDesc"></p>
-      <div class="modal-btns">
-        <button class="modal-play" id="modalPlayBtn">&#9654; Play</button>
-        <button class="modal-close-btn" onclick="closeModal()">&#10005; Close</button>
+  <section id="home" class="section hero-section">
+    <div class="hero-bg-text">PORTFOLIO</div>
+    <div class="hero-content">
+      <div class="hero-tag">Open to Opportunities</div>
+      <h1 class="hero-title">
+        Hi, I'm <span class="highlight">Harika Devi Varre</span><br/>
+        <span class="typed-wrapper">I love <span id="typed-text"></span><span class="cursor-blink">|</span></span>
+      </h1>
+      <p class="hero-sub">Aspiring Software Engineer · B.Tech CSE @ Ramachandra College of Engineering · CGPA 9.6 · Building skills through real-world projects and continuous learning.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Projects</a>
+        <a href="mailto:varreharikadevi@gmail.com" class="btn btn-ghost">Get In Touch</a>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Player -->
-<div class="player-overlay" id="playerOverlay">
-  <div class="player-box">
-    <button class="back-btn" onclick="closePlayer()">&#8592; Back</button>
-    <div class="player-screen">
-      <img id="playerImg" src="" alt=""/>
-      <span class="player-play-icon" id="playIcon" onclick="togglePlay()">&#9654;</span>
+    <div class="hero-orbs">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
     </div>
-    <div class="player-controls">
-      <div class="progress" onclick="seekBar(event)">
-        <div class="progress-done" id="progressBar"></div>
-      </div>
-      <div class="ctrl-row">
-        <div>
-          <button onclick="togglePlay()" id="ctrlBtn">&#9654;</button>
-          <button>&#9198;</button>
-          <button>&#9197;</button>
-          <button>&#128266;</button>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <div class="section-label">01 — Skills</div>
+      <h2 class="section-title centered">What I <em>Know</em></h2>
+      <p class="section-subtitle">Technologies and abilities I've built through projects and internships</p>
+      <div class="skills-grid">
+        <div class="skill-card" data-delay="0">
+          <div class="skill-icon"><i class="fab fa-python"></i></div>
+          <h3>Python</h3>
+          <p>Built real applications including a Calculator and Contact Book during my TechnoHacks internship.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+          <span class="skill-percent">85%</span>
         </div>
-        <div class="time" id="timeDisplay">0:00 / 2:49:00</div>
-        <div>
-          <button>&#9881;</button>
-          <button>&#9974;</button>
+        <div class="skill-card" data-delay="100">
+          <div class="skill-icon"><i class="fab fa-html5"></i></div>
+          <h3>HTML5</h3>
+          <p>Developed structured, semantic web pages during BIST Technologies internship and personal projects.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+          <span class="skill-percent">90%</span>
+        </div>
+        <div class="skill-card" data-delay="200">
+          <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+          <h3>CSS3</h3>
+          <p>Styled responsive and visually appealing web pages with modern CSS techniques.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+          <span class="skill-percent">85%</span>
+        </div>
+        <div class="skill-card" data-delay="300">
+          <div class="skill-icon"><i class="fas fa-database"></i></div>
+          <h3>SQL</h3>
+          <p>Worked with SQL for software development tasks during my Cognifyz Technologies internship.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+          <span class="skill-percent">70%</span>
+        </div>
+        <div class="skill-card" data-delay="400">
+          <div class="skill-icon"><i class="fas fa-brain"></i></div>
+          <h3>Machine Learning</h3>
+          <p>Got exposure to ML concepts and Data Analysis techniques during Cognifyz Technologies internship.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+          <span class="skill-percent">60%</span>
+        </div>
+        <div class="skill-card" data-delay="500">
+          <div class="skill-icon"><i class="fas fa-robot"></i></div>
+          <h3>Artificial Intelligence</h3>
+          <p>Certified by IBM and Oracle in AI fundamentals; attended the SRM University AI Workshop.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+          <span class="skill-percent">65%</span>
+        </div>
+        <div class="skill-card" data-delay="600">
+          <div class="skill-icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>Data Analytics</h3>
+          <p>Completed a 5-day crash course on Data Analytics with Python at Innomatics Research Labs.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+          <span class="skill-percent">65%</span>
+        </div>
+        <div class="skill-card" data-delay="700">
+          <div class="skill-icon"><i class="fas fa-globe"></i></div>
+          <h3>Web Development</h3>
+          <p>Built product websites and portfolio pages with clean, user-friendly design and structure.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+          <span class="skill-percent">88%</span>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- Footer -->
-<footer>
-  <p>Netflix Clone Project | Hunar Intern Task 3</p>
-  <p style="margin-top:5px;">&#169; 2024 This is just a demo project, not the real Netflix.</p>
-</footer>
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <div class="section-label">02 — Projects</div>
+      <h2 class="section-title centered">My <em>Projects</em></h2>
+      <p class="section-subtitle">Things I've built during internships and on my own</p>
 
-<script src="script.js"></script>
+      <div class="slider-wrapper">
+        <div class="slider-track" id="sliderTrack">
+
+          <div class="project-card">
+            <div class="project-image pi-1">
+              <div class="project-overlay"><i class="fas fa-watch"></i></div>
+            </div>
+            <div class="project-info">
+              <div class="project-tag">Web Development</div>
+              <h3>SmartFit Pro — Product Website</h3>
+              <p class="project-short">A single-page product website for a smartwatch brand built with HTML & CSS.</p>
+              <div class="project-details" id="details-1">
+                <p>Designed a visually appealing single-page product website for the SmartFit Pro Smartwatch. Includes sections on health tracking features, connectivity options, and product highlights — all styled with clean CSS layouts and a responsive design.</p>
+                <div class="tech-tags">
+                  <span>HTML5</span><span>CSS3</span><span>Responsive Design</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/HarikaDeviVarre123" target="_blank" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+              </div>
+              <button class="btn btn-sm view-details-btn" data-target="details-1">
+                <span>View Details</span> <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image pi-2">
+              <div class="project-overlay"><i class="fas fa-laptop-code"></i></div>
+            </div>
+            <div class="project-info">
+              <div class="project-tag">Web Development</div>
+              <h3>Personal Portfolio Website</h3>
+              <p class="project-short">My personal portfolio built with HTML and CSS to showcase my skills and projects.</p>
+              <div class="project-details" id="details-2">
+                <p>Designed and developed a personal portfolio website using HTML and CSS to display my background, technical skills, and completed projects. This project helped me practice structuring web content, applying consistent styling, and presenting myself professionally online.</p>
+                <div class="tech-tags">
+                  <span>HTML5</span><span>CSS3</span><span>Portfolio</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/HarikaDeviVarre123" target="_blank" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+              </div>
+              <button class="btn btn-sm view-details-btn" data-target="details-2">
+                <span>View Details</span> <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image pi-3">
+              <div class="project-overlay"><i class="fas fa-calculator"></i></div>
+            </div>
+            <div class="project-info">
+              <div class="project-tag">Python · TechnoHacks</div>
+              <h3>Calculator App</h3>
+              <p class="project-short">A fully functional calculator built with Python during my TechnoHacks internship.</p>
+              <div class="project-details" id="details-3">
+                <p>Developed a Python-based Calculator application as part of my Python Development internship at TechnoHacks Solutions. Handles all basic arithmetic operations with clean input/output logic and error management for invalid inputs.</p>
+                <div class="tech-tags">
+                  <span>Python</span><span>CLI</span><span>TechnoHacks Internship</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/HarikaDeviVarre123" target="_blank" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+              </div>
+              <button class="btn btn-sm view-details-btn" data-target="details-3">
+                <span>View Details</span> <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image pi-4">
+              <div class="project-overlay"><i class="fas fa-address-book"></i></div>
+            </div>
+            <div class="project-info">
+              <div class="project-tag">Python · TechnoHacks</div>
+              <h3>Contact Book Application</h3>
+              <p class="project-short">A Python app to add, search, and manage contacts — built during my internship.</p>
+              <div class="project-details" id="details-4">
+                <p>Built a Contact Book Application using Python during my internship at TechnoHacks Solutions. Features include adding, viewing, searching, and deleting contacts with persistent data handling. This project strengthened my Python programming and problem-solving skills.</p>
+                <div class="tech-tags">
+                  <span>Python</span><span>File Handling</span><span>TechnoHacks Internship</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/HarikaDeviVarre123" target="_blank" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+              </div>
+              <button class="btn btn-sm view-details-btn" data-target="details-4">
+                <span>View Details</span> <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-btn" id="prevBtn"><i class="fas fa-arrow-left"></i></button>
+          <div class="slider-dots" id="sliderDots"></div>
+          <button class="slider-btn" id="nextBtn"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="section-label">03 — Contact</div>
+      <h2 class="section-title centered">Let's <em>Connect</em></h2>
+      <p class="section-subtitle">I'm open to internship opportunities, collaborations, and exciting projects!</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Email</h4>
+              <p>varreharikadevi@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <h4>Phone</h4>
+              <p>Please contact me through Mail</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>Location</h4>
+              <p>Andhra Pradesh, India</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/HarikaDeviVarre123" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/harika-devi-varre-a767182aa" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:varreharikadevi@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email Address" required />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Subject" />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width">
+            <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle"></i> Message sent! Harika will get back to you soon.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">HD<span>.</span></div>
+      <p>Designed & Built by <strong>Harika Devi Varre</strong> — 2026</p>
+      <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
